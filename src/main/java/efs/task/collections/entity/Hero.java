@@ -1,5 +1,7 @@
 package efs.task.collections.entity;
 
+import java.util.Objects;
+
 public class Hero {
     private String name;
     private String heroClass;
@@ -18,15 +20,22 @@ public class Hero {
     }
 
     //TODO implementacja metody equal porównująca obiekty Hero na podstawie pól name i heroClass.
+
+
     @Override
     public boolean equals(Object o) {
-        return true;
+        if (this == o) return true;
+        if (!(o instanceof Hero hero)) return false;
+
+        if (!Objects.equals(name, hero.name)) return false;
+        return Objects.equals(heroClass, hero.heroClass);
     }
 
-    //TODO implementacja metody equal biorąca pod uwagę name i heroClass.
     @Override
     public int hashCode() {
-        return 1;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (heroClass != null ? heroClass.hashCode() : 0);
+        return result;
     }
 
     @Override
